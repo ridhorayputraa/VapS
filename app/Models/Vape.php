@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Vape extends Model
 {
@@ -13,9 +14,9 @@ class Vape extends Model
     // dari migtaration Vapesnya -> softDeletes
 
          protected $fillable = [
-        'name', 'email', 'password',
-        'address', 'houseNumber', 'phoneNumber','city',
-        'roles'
+        'name', 'description', 'spesification',
+        'price', 'rate', 'types', 'picturePath'
+        // PicturePath dibawah-> laravel gabisa baca camelCase
     ];
 
 
@@ -33,5 +34,18 @@ class Vape extends Model
     public function getUpdatedAtAttribute($value) {
         // membuat assesor untuk mengakses file yang sudah ada
         return Carbon::parse($value)->timestamp;
+    }
+
+
+    // fungsi untuk merubah picture_path => picturePath
+    public function toArray(){
+        $toArray = parent::toArray();
+        $toArray['picturePath'] = $this->picturePath;
+        return $toArray;
+    }
+
+    // agar url nya lengkap
+    public function getPicturePathAttribute(){
+        return url('') . Storage::url($this->attributes['picturePath']) ;
     }
 }
