@@ -15,6 +15,16 @@ class CreateVapesTable extends Migration
     {
         Schema::create('vapes', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->text('description')->nullable();
+            $table->text('spesification')->nullable();
+            $table->integer('price')->nullable();
+            $table->double('rate')->nullable();
+            $table->string('types')->nullable();
+            $table->text('picturePath')->nullable();
+
+            // datanya ridak terhapus secara total
+            $table->softDeletes();
             $table->timestamps();
         });
     }
