@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -25,8 +26,10 @@ class User extends Authenticatable
      *
      * @var string[]
      */
-    protected $fillable = [
+     protected $fillable = [
         'name', 'email', 'password',
+        'address', 'houseNumber', 'phoneNumber','city',
+        'roles'
     ];
 
     /**
@@ -55,7 +58,23 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $appends = [
+  protected $appends = [
         'profile_photo_url',
     ];
+
+    protected $guarded = [
+        'id'
+    ];
+
+    // epoch untuk FE
+    public function getCreatedAtAttribute($value) {
+        // membuat assesor untuk mengakses file yang sudah ada
+        return Carbon::parse($value)->timestamp;
+    }
+
+    // epoch untuk FE
+    public function getUpdatedAtAttribute($value) {
+        // membuat assesor untuk mengakses file yang sudah ada
+        return Carbon::parse($value)->timestamp;
+    }
 }
