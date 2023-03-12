@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     //
+
+        // Untuk validasi password Register
+    use PasswordValidationRules
+
+
     public function login(Request $request){
         // gunakan try catcth untuk konjdisi terpenuhi/tidak
         try{
@@ -52,5 +57,44 @@ class UserController extends Controller
             ], 'Authentication Failed', 500);
         }
     }
-    
+
+     public function register(Request $request){
+        try{
+            $request->validate([
+                'name' => ['required', 'string', 'max:20'],
+                'email' => ['required', 'string', 'email', 'max:20', 'unique:users'],
+                'password' => $this->passwordRules()
+            ]);
+
+            User::create([
+                'name' => $request-> name,
+                'email' => $request->email,
+                'address' => $request->address,
+                'houseNumber' => $request->houseNumber,
+                'phoneNumber' => $request->phoneNumber,
+                'city' => $request->city,
+                'password' => Hash::make($request->password),
+            ]);
+
+            // setUser
+            $user = User::where('email', $request->email)->first();
+
+            // sekalian login berikan token
+            $tokenResult = $user->createToken('authToken')->plainTextToken;
+            return ResponseFormatter::success([
+                'access_token' => $tokenResult,
+                'token_type' => 'Bearer',
+                'user' => $user
+            ]);
+
+        }catch(Exception $error){
+            return ResponseFormatter::error([
+                'message' => 'something went wrong',
+                'error' => $error
+            ], 'Authentication Failed', 500);
+        }
+
+    }
+
+
 }
