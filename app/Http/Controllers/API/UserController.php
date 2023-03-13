@@ -105,6 +105,13 @@ class UserController extends Controller
         return ResponseFormatter::success($token, 'Token Revoked');
     }
 
+    // API User
+    public function fetch(Request $request){
+        return ResponseFormatter::success(
+            $request->user(), 'Data profile berhasil diambil'
+        );
+    }
+
     public function updateProfile(Request $request){
         // ambil semua data inputan user
         $data = $request->all();
