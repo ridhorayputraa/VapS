@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -122,6 +123,42 @@ class UserController extends Controller
         $user->update($data);
 
         return ResponseFormatter::success($user, "Profile Updated");
+    }
+
+    public function updatePhoto(Request $request){
+// cek validasi yang di upload gambar atau bukan
+        $validator = Validator::make($request->all(),
+        [
+            'file' => 'required|image|max:2048'
+        ]);
+
+        if($validator->fails())
+        {
+            return ResponseFormatter::error(
+                [ 'error' => $validator->errors() ],
+                'Update photo fails',
+                401
+            );
+        }
+
+        if($request->file('file'))
+        {
+            // upload fotonya
+            $file = $request->file->store('assets/user', 'public');
+
+            // Simpen foto ke database(Urlnya)
+
+            // gambar tetep di folder hanya upload URL nya
+
+            // panggil model user nya
+            $user = Auth::user();
+            // panggil field nya dan gantikan dengan yang sudah di upload
+            $user->profile_photo_path = $file;
+            // UPdated user nya
+            $user->update();
+
+            return ResponseFormatter::success([$file], 'File succesfully Uploaded');
+        }
     }
 
 }
