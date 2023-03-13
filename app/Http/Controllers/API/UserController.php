@@ -96,5 +96,13 @@ class UserController extends Controller
 
     }
 
+    public function logout(Request $request){
+        // ambil user yang sudah login kemudian delete tokennya
+
+        $token = $request->user()->currentAccesToken()->delete();
+
+        // Kemablikan datanya
+        return ResponseFormatter::success($token, 'Token Revoked');
+    }
 
 }
