@@ -105,4 +105,16 @@ class UserController extends Controller
         return ResponseFormatter::success($token, 'Token Revoked');
     }
 
+    public function updateProfile(Request $request){
+        // ambil semua data inputan user
+        $data = $request->all();
+
+        // panggil data user saat ini
+        $user = Auth::user();
+        // Tiban dengan data inputan terbaru
+        $user->update($data);
+
+        return ResponseFormatter::success($user, "Profile Updated");
+    }
+
 }
