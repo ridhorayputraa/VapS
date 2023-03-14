@@ -18,11 +18,14 @@ class VapeController extends Controller
     $name = $request->input('name');
     $types = $request->input('types');
 
-
     // Berdasarkan harga dari yang terkecil -> terbesar
     $price_from = $request->input('price_from');
     $price_to = $request->input('price_to');
 
-    
+    // Berdasarkan Rating
+    $rate_from = $request->input('rate_from');
+    $rate_to = $request->input('rate_to');
+
+
     }
 }
