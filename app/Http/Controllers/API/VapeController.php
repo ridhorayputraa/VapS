@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
+use App\Models\Vape;
 use Illuminate\Http\Request;
 
 class VapeController extends Controller
@@ -25,6 +27,25 @@ class VapeController extends Controller
     // Berdasarkan Rating
     $rate_from = $request->input('rate_from');
     $rate_to = $request->input('rate_to');
+
+
+    // Buat filtering datanya berdasarkan id
+    if($id){
+        $vape = Vape::find($id);
+
+        if($vape){
+            return ResponseFormatter::success(
+                $vape,
+                'Data produk berhasil di ambil'
+            );
+        }else{
+            return ResponseFormatter::error(
+                null,
+                'Data produk not found',
+                404
+            );
+        }
+    }
 
 
     }
