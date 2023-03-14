@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Transaction;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
@@ -46,8 +47,10 @@ class TransactionController extends Controller
     }
 
     // Buat filtering sisanya
-    // buat dulu query dasarnya
-    $vape = Vape::query();
+    // buat dulu query dasarnya menggunakan where
+    // kenapa where() ? karena kita ingin mengambil transksi hanya 'dia saja'
+    // bukan orang lain
+    $transaction = Transaction::with(['vape', 'user'])->where('user_id', Auth::user()->id);
 
     // Berdasarkan nama
     if($name){
