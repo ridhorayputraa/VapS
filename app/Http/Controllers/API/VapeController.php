@@ -70,5 +70,15 @@ class VapeController extends Controller
         $vape->where('price', '<=' , $price_to);
     }
 
+    // Berdasarkan rating dari yang terkecil
+    if($rate_from){
+        $vape->where('rate', '>=', $rate_from);
+    }
+
+    if($rate_to){
+        $vape->where('rate', '<=' , $rate_to);
+    }
+
+    
     }
 }
