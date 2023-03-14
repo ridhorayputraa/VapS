@@ -20,6 +20,9 @@ class VapeController extends Controller
 
 
     // Berdasarkan harga dari yang terkecil -> terbesar
+    $price_from = $request->input('price_from');
+    $price_to = $request->input('price_to');
+
     
     }
 }
