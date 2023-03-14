@@ -50,40 +50,24 @@ class TransactionController extends Controller
     // buat dulu query dasarnya menggunakan where
     // kenapa where() ? karena kita ingin mengambil transksi hanya 'dia saja'
     // bukan orang lain
-    $transaction = Transaction::with(['vape', 'user'])->where('user_id', Auth::user()->id);
+    $transaction = Transaction::with(['vape', 'user'])
+    ->where('user_id', Auth::user()->id);
 
-    // Berdasarkan nama
-    if($name){
-        $vape->where('name', 'like', '%' . $name . '%');
+    // Berdasarkan nama vape ID
+    if($vape_id){
+        // bisa dikatakan begini 'vape_id = $vape_id'
+        $transaction->where('vape_id', $vape_id);
     }
 
-    // Berdasarkan types
-    if($types){
-        $vape->where('types', 'like', '%' . $types . '%');
-    }
-
-    // Berdasarkan harga dari yang terkecil
-    if($price_from){
-        $vape->where('price', '>=', $price_from);
-    }
-
-    if($price_to){
-        $vape->where('price', '<=' , $price_to);
-    }
-
-    // Berdasarkan rating dari yang terkecil
-    if($rate_from){
-        $vape->where('rate', '>=', $rate_from);
-    }
-
-    if($rate_to){
-        $vape->where('rate', '<=' , $rate_to);
+    // Berdasarkan status
+    if($status){
+        $transaction->where('status',  $status );
     }
 
     return ResponseFormatter::success(
-        $vape->paginate($limit),
+        $transaction->paginate($limit),
         // tamabhkan paginasi
-        'Data list produk berhasil di ambil'
+        'Data list transaksi berhasil di ambil'
     );
 
     }
