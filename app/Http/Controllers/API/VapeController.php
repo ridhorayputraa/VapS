@@ -79,6 +79,11 @@ class VapeController extends Controller
         $vape->where('rate', '<=' , $rate_to);
     }
 
-    
+    return ResponseFormatter::success(
+        $vape->paginate($limit),
+        // tamabhkan paginasi
+        'Data list produk berhasil di ambil'
+    );
+
     }
 }
