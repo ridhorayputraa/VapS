@@ -56,5 +56,11 @@ class VapeController extends Controller
         $vape->where('name', 'like', '%' . $name . '%');
     }
 
+    // Berdasarkan types
+    if($types){
+        $vape->where('types', 'like', '%' . $types . '%');
+    }
+
+    
     }
 }
