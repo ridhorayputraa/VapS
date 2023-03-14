@@ -14,6 +14,7 @@ class TransactionController extends Controller
     //
         //
     public function all(Request $request){
+
      // 1 fungsi ini  akan menghandle semua request
     // perlu menyiapkan beberapa opsi untuk filter
     // Berdasarkan ID, Berdasarlan Harga, Berdasarkan Tipe
@@ -71,4 +72,18 @@ class TransactionController extends Controller
     );
 
     }
+
+
+    // Api Transaksi Update
+    public function update(Request $request, $id){
+        $transaction = Transaction::findOrFail($id);
+
+        // update data setelah di ambil
+        $transaction->update($request->all());
+
+        return ResponseFormatter::success($transaction,
+         'Transaksi berhasil di perbarui');
+
+    }
+
 }
