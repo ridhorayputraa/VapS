@@ -61,6 +61,14 @@ class VapeController extends Controller
         $vape->where('types', 'like', '%' . $types . '%');
     }
 
-    
+    // Berdasarkan harga dari yang terkecil
+    if($price_from){
+        $vape->where('price', '>=', $price_from);
+    }
+
+    if($price_to){
+        $vape->where('price', '<=' , $price_to);
+    }
+
     }
 }
