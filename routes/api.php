@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\VapeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,5 @@ Route::post('logout', [UserController::class, 'logout']);
 // Jika belum
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
+
+Route::get('vaps', [VapeController::class, 'all']);
