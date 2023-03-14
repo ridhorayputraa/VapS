@@ -47,6 +47,14 @@ class VapeController extends Controller
         }
     }
 
+    // Buat filtering sisanya
+    // buat dulu query dasarnya
+    $vape = Vape::query();
+
+    // Berdasarkan nama
+    if($name){
+        $vape->where('name', 'like', '%' . $name . '%');
+    }
 
     }
 }
