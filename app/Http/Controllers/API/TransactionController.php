@@ -41,7 +41,7 @@ class TransactionController extends Controller
         }else{
             return ResponseFormatter::error(
                 null,
-                'Data transaksi not found',
+                'Data transaksi tidak di temukan',
                 404
             );
         }
