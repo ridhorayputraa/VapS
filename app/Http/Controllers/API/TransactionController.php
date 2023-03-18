@@ -8,7 +8,9 @@ use Midtrans\Config;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Support\Facades\Auth;
+use Midtrans\Snap;
 
 class TransactionController extends Controller
 {
@@ -115,7 +117,7 @@ class TransactionController extends Controller
         Config::$is3ds = config('services.midtrans.is3ds');
 
         // Panggil transaksi yang tadi dibuat
-        $tramsaction = Transaction::with(['vape', 'user'])->find($transaction->id);
+        $transaction = Transaction::with(['vape', 'user'])->find($transaction->id);
 
         // Membuat Transaski Midtrans
         $midtrans = [
@@ -135,6 +137,29 @@ class TransactionController extends Controller
             ],
             'vtweb' => []
         ];
+
+        // Memanggil Midtrans
+        // Dengan try catch agar tau bila ada error
+        try{
+            // Ambil halaman payments midtrans
+            $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
+            // update data nya
+            $transaction->payment_url = $paymentUrl;
+            $transaction->save();
+
+            // Mengembalikan Data ke API
+            return ResponseFormatter::success(
+                $transaction,
+                'Transaksi berhasil'
+            );
+        }catch(Exception $e){
+            // untuk error
+            return ResponseFormatter::error(
+                $e->getMessage(),
+                'Transaksi Gagal'
+            );
+        }
+
     }
 
 }
