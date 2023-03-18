@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Vape;
+use App\Transaction;
+use Midtrans\Config;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
-use App\Transaction;
 use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
@@ -96,6 +97,17 @@ class TransactionController extends Controller
             'total' => 'required',
             'status' => 'required'
         ]);
+
+        $transaction = Transaction::create([
+            'vape_id' => $request->vape_id,
+            'user_id' => $request->user_id,
+            'quantity' => $request->quantity,
+            'total' => $request->total,
+            'status' => $request->status,
+            'payment_url' => '',
+            // akan di update setelah nembak midtras
+        ]);
+
       }
 
 }
