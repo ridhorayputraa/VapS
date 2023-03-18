@@ -86,4 +86,16 @@ class TransactionController extends Controller
 
     }
 
+      // API Checkout dengan midtrans
+      public function checkout(Request $request){
+        $request->validate([
+            'vape_id' => 'required|exists:vapes,id',
+            // Arahin ke table vape dan cek id nya ada atau nggak
+            'user_id' => 'required|exists:users,id',
+            'quantity' => 'required',
+            'total' => 'required',
+            'status' => 'required'
+        ]);
+      }
+
 }
