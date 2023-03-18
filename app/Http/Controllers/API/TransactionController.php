@@ -115,7 +115,26 @@ class TransactionController extends Controller
         Config::$is3ds = config('services.midtrans.is3ds');
 
         // Panggil transaksi yang tadi dibuat
-        $transaction = Transaction::with(['vape', 'user'])->find($transaction->id);
+        $tramsaction = Transaction::with(['vape', 'user'])->find($transaction->id);
+
+        // Membuat Transaski Midtrans
+        $midtrans = [
+            // Referensi datanya ada snap-docs.midtrans.com->request Body
+            'transaction_details' => [
+               'order_id' => $transaction->id,
+               'gross_amount' => (int) $transaction->total,
+            ],
+            'customer_details' => [
+                'first_name' => $transaction->user->name,
+                'email' => $transaction->user->email,
+            ],
+            'enable_payment' => [
+                // Enable payment isi untuk payment apa aja
+                'gopay',
+                'bank_transfer'
+            ],
+            'vtweb' => []
+        ];
     }
 
 }
