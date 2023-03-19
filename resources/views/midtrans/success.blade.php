@@ -25,6 +25,7 @@
         <p class="text-lg">
             Trsansaksi Dibuat.Silahkan melakukan proses pembayaran sesuai
             langkah yang telah tercantum
+             <br> <small>Silahkan tutup halaman ini</small
         </p>
         </div>
     </body>
