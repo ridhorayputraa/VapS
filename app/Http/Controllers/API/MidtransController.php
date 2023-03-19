@@ -76,4 +76,19 @@ class MidtransController extends Controller
       // Jangan lupa masukan midtrans URL callback untuk menerima transaksinya
         // vape.id/api/midtrans/callback
     }
+
+    public function success()
+    {
+        return view('midtrans.success');
+    }
+
+    public function unfinish()
+    {
+        return view('midtrans.unfinish');
+    }
+
+    public function error()
+    {
+        return view('midtrans.error');
+    }
 }
