@@ -15,21 +15,29 @@ class Transaction extends Model
 
 
     protected $fillable = [
-        'user_id', 'vape_id', 'quantity',
+        'vape_id', 'user_id', 'quantity',
         'total', 'status', 'payment_url',
     ];
 
+        protected $guarded = [
+            'id'
+        ];
+
+    // public function vape(){
+    //     $this->hasOne(Vape::class, 'id', 'vape_id');
+    // }
+
+    // public function user(){
+    //     $this->hasOne(User::class, 'id', 'user_id');
+    // }
+
     public function vape(){
-        $this->hasOne(Vape::class, 'id', 'vape_id');
+        return $this->belongsTo(Vape::class, 'vape_id');
     }
 
     public function user(){
-        $this->hasOne(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
-
-    protected $guarded = [
-        'id'
-    ];
 
     // epoch untuk FE
     public function getCreatedAtAttribute($value) {

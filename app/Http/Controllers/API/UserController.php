@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Actions\Fortify\PasswordValidationRules;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
@@ -16,7 +17,7 @@ class UserController extends Controller
     //
 
         // Untuk validasi password Register
-    use PasswordValidationRules
+    use PasswordValidationRules;
 
 
     public function login(Request $request){
