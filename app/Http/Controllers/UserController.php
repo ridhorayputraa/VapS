@@ -107,8 +107,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+
+    //  Langsung ganti menjadi User biar ga chengli
+    public function destroy(User $user)
     {
-        //
+        // langsung di delete
+        $user->delete();
+        // Kemudian redirect ke halaman dashboard
+        return redirect()->route('users.index');
     }
 }
