@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\MidtransController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VapeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,7 @@ Route::prefix('dashboard')
         ->name('dashboard');
         // Kasih nama routing nya
         Route::resource('users', UserController::class);
+        Route::resource('vape', VapeController::class);
     });
 
 
