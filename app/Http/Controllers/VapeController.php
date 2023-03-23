@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vape;
 use Illuminate\Http\Request;
 
 class VapeController extends Controller
@@ -13,7 +14,10 @@ class VapeController extends Controller
      */
     public function index()
     {
-        //
+        $vape = Vape::paginate(10);
+        return view('food.index', [
+            'vape' => $vape
+        ]);
     }
 
     /**
