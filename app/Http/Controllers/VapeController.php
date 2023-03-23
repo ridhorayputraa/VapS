@@ -15,7 +15,7 @@ class VapeController extends Controller
     public function index()
     {
         $vape = Vape::paginate(10);
-        return view('food.index', [
+        return view('vape.index', [
             'vape' => $vape
         ]);
     }
