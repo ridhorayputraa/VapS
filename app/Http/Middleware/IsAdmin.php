@@ -21,9 +21,9 @@ class IsAdmin
         // dan user tersebut roles nya adalah admin
         if(Auth::user() && Auth::user()->roles == "ADMIN"){
         //    Maka masukan Dashboard
-            return $next($request);
-        }
+        return $next($request);
+    }
+    return redirect('/login');
 
-        return redirect('/');
     }
 }
