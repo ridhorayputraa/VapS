@@ -18,7 +18,7 @@ class TransactionController extends Controller
         // Masukan Relasi nya
         $transaction = Transaction::with(['vape', 'user'])
         ->paginate(10);
-        return view('transcation.index', [
+        return view('transactions.index', [
             'transactions' => $transaction
         ]);
     }
