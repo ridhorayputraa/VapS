@@ -94,6 +94,15 @@ class TransactionController extends Controller
 
     // Buat method baru
     public function changeStatus(Request $request, $id, $status){
+        // Panggil model Transaction jika ada Id nya aja
 
+        $transaction = Transaction::findOrFail($id);
+
+        // status ambil dari status parameter
+        $transaction->status = $status;
+        $transaction->save();
+
+        // masukan route show -> untuk || parameter untuk mengarhkan ke Id yang sesuai
+        return redirect()->route('transactions.show', $id);
     }
 }
