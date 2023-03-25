@@ -111,8 +111,11 @@ class VapeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Vape $vape)
     {
-        //
+        // langsung di delete
+        $vape->delete();
+        // Kemudian redirect ke halaman dashboard
+        return redirect()->route('vape.index');
     }
 }
