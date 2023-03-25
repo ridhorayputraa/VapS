@@ -73,9 +73,13 @@ class VapeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+
+    //  Langsung ke model Vape
+    public function edit(Vape $vape)
     {
-        //
+        return view('vape.edit' , [
+            'item' => $vape
+        ]);
     }
 
     /**
@@ -85,9 +89,20 @@ class VapeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(VapeRequest $request, Vape $vape)
     {
         //
+        $data = $request->all();
+        if($request->file('picturePath'))
+        {
+          $data['picturePath'] = $request->file('picturePath')->store('assets/food', 'public');
+        }
+
+        // Assign kembali value nya
+        $vape->update($data);
+
+        // langsung redirect ke index Vape
+        return redirect()->route('vape.index');
     }
 
     /**
