@@ -37,6 +37,9 @@ Route::prefix('dashboard')
         Route::resource('users', UserController::class);
         Route::resource('vape', VapeController::class);
 
+        Route::get('transactions/{id}/status/{status}',
+         [TransactionController::class, 'changeStatus'])
+         ->name('transactions.changeStatus');
         // Tammbahkan kelas nya -> changeStatus
         // Beri nama dengan name()
 
