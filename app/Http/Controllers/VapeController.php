@@ -98,7 +98,7 @@ class VapeController extends Controller
           $data['picturePath'] = $request->file('picturePath')->store('assets/food', 'public');
         }
 
-        // Assign kembali value nya
+    // Assign kembali value nya
         $vape->update($data);
 
         // langsung redirect ke index Vape

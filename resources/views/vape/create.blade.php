@@ -58,7 +58,7 @@
                             </label>
                             <input value="{{ old('spesification') }}" name="spesification" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Product Spesification">
                             {{-- Biar admin yang masukin sesuai format --}}
-                            <p class="text-gray-600 text-xs italic">Dipisahkan dengan koma, contoh: Bawang Merah, Paprika, Bawang Bombay, Timun</p>
+                            <p class="text-gray-600 text-xs italic">Dipisahkan dengan koma, contoh: Kapasitas Baterai	30000mAh, Kapasitas Tangki	15ml, Lilitan Kawat	Throat Hitters, USB Port	USB</p>
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
