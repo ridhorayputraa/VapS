@@ -88,4 +88,9 @@ class TransactionController extends Controller
     {
         //
     }
+
+    // Buat method baru
+    public function changeStatus(Request $request, $id, $status){
+
+    }
 }
