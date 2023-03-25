@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\MidtransController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VapeController;
@@ -35,6 +36,12 @@ Route::prefix('dashboard')
         // Kasih nama routing nya
         Route::resource('users', UserController::class);
         Route::resource('vape', VapeController::class);
+
+        // Tammbahkan kelas nya -> changeStatus
+        // Beri nama dengan name()
+
+        // taroh di atas ? kalau taruh di bawah bakalan di tindih
+        Route::resource('transactions', TransactionController::class);
     });
 
 
