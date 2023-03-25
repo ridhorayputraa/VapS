@@ -13,7 +13,7 @@ class VapeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class VapeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            //Tambahkan validasi nya sesuai field
+            'name' => 'required|max:255',
+            'picturePath' => 'required|image',
+            'spesification' => 'required',
+            'price' => 'required| integer',
+            'rate' => 'required|numeric',
+            // Karna tidak ingin menambhkan validasi di types
+            'types' => ''
         ];
     }
 }
