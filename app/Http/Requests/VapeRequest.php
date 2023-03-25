@@ -26,7 +26,7 @@ class VapeRequest extends FormRequest
         return [
             //Tambahkan validasi nya sesuai field
             'name' => 'required|max:255',
-            'picturePath' => 'required|image',
+            'picturePath' => 'required|image|max:5028',
             'spesification' => 'required',
             'price' => 'required| integer',
             'rate' => 'required|numeric',

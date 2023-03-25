@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\VapeRequest;
 use App\Models\Vape;
 use Illuminate\Http\Request;
 
@@ -25,9 +26,10 @@ class VapeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
-        //
+        return view('vape.create');
     }
 
     /**
@@ -36,9 +38,22 @@ class VapeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+    //  Untuk create tapi logic nya
+    public function store(VapeRequest $request)
     {
-        //
+    //    Menambil daya request dari Validasi
+    // Vape Request
+
+    $data = $request->all();
+    $data['picturePath'] = $request->file('picturePath')
+    ->store('assets/vape', 'public');
+
+    // Masukan query create
+    Vape::create($data);
+
+    return redirect()->route('vape.index');
+
     }
 
     /**
