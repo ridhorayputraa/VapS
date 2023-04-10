@@ -28,6 +28,7 @@ class VapeController extends Controller
     $rate_from = $request->input('rate_from');
     $rate_to = $request->input('rate_to');
 
+// Finish Creating API
 
     // Buat filtering datanya berdasarkan id
     if($id){
